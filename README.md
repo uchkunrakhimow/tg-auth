@@ -23,18 +23,21 @@ A production-ready Telegram-based OTP authentication backend built with **Bun**,
 ## 🛠️ Installation
 
 1. **Clone and install dependencies:**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/uchkunrakhimow/tg-auth.git
    cd tg-auth
    bun install
    ```
 
 2. **Set up environment variables:**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Edit `.env` with your configuration:
+
    ```env
    TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
    REDIS_HOST=127.0.0.1
@@ -44,10 +47,11 @@ A production-ready Telegram-based OTP authentication backend built with **Bun**,
    ```
 
 3. **Start Redis server:**
+
    ```bash
    # Using Docker
    docker run -d -p 6379:6379 redis:alpine
-   
+
    # Or install locally
    redis-server
    ```
@@ -55,6 +59,7 @@ A production-ready Telegram-based OTP authentication backend built with **Bun**,
 ## 🚀 Usage
 
 ### Start the application:
+
 ```bash
 bun run start
 # or for development with hot reload
@@ -62,6 +67,7 @@ bun run dev
 ```
 
 ### Expected output:
+
 ```
 🚀 Starting Telegram OTP Authentication Backend...
 
@@ -86,17 +92,20 @@ bun run dev
 4. **Use the code** in your web application
 
 ### Bot Commands:
+
 - `/start` - Generate a new OTP code
 - `/help` - Show help information
 
 ## 🌐 API Endpoints
 
 ### Health Check
+
 ```http
 GET /health
 ```
 
 **Response:**
+
 ```json
 {
   "status": "ok",
@@ -105,6 +114,7 @@ GET /health
 ```
 
 ### Verify OTP
+
 ```http
 POST /api/verify-otp
 Content-Type: application/json
@@ -115,6 +125,7 @@ Content-Type: application/json
 ```
 
 **Success Response:**
+
 ```json
 {
   "success": true,
@@ -129,6 +140,7 @@ Content-Type: application/json
 ```
 
 **Error Response:**
+
 ```json
 {
   "success": false,
@@ -165,13 +177,13 @@ src/
 
 ## 🔧 Configuration
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `TELEGRAM_BOT_TOKEN` | Your Telegram bot token | Required |
-| `REDIS_HOST` | Redis server hostname | `127.0.0.1` |
-| `REDIS_PORT` | Redis server port | `6379` |
-| `SERVER_PORT` | API server port | `3000` |
-| `RATE_LIMIT_WINDOW` | Rate limit window in ms | `60000` |
+| Variable             | Description             | Default     |
+| -------------------- | ----------------------- | ----------- |
+| `TELEGRAM_BOT_TOKEN` | Your Telegram bot token | Required    |
+| `REDIS_HOST`         | Redis server hostname   | `127.0.0.1` |
+| `REDIS_PORT`         | Redis server port       | `6379`      |
+| `SERVER_PORT`        | API server port         | `3000`      |
+| `RATE_LIMIT_WINDOW`  | Rate limit window in ms | `60000`     |
 
 ## 🧪 Testing
 
@@ -192,6 +204,7 @@ curl -X POST http://localhost:3000/api/verify-otp \
 ### Using Docker:
 
 1. **Create Dockerfile:**
+
    ```dockerfile
    FROM oven/bun:1 as base
    WORKDIR /app
@@ -209,6 +222,7 @@ curl -X POST http://localhost:3000/api/verify-otp \
    ```
 
 ### Using PM2:
+
 ```bash
 bun install -g pm2
 pm2 start "bun run start" --name tg-auth
@@ -254,10 +268,12 @@ MIT License - see LICENSE file for details.
 ### Common Issues:
 
 1. **Redis Connection Failed**
+
    - Ensure Redis server is running
    - Check `REDIS_HOST` and `REDIS_PORT` in `.env`
 
 2. **Telegram Bot Not Responding**
+
    - Verify `TELEGRAM_BOT_TOKEN` is correct
    - Check bot permissions and webhook settings
 
@@ -267,6 +283,7 @@ MIT License - see LICENSE file for details.
    - Verify OTP format (6 digits)
 
 ### Debug Mode:
+
 Set `NODE_ENV=development` for verbose logging.
 
 ---
